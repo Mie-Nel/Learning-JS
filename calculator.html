@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    div {
+      position: relative;
+      width: 200px;
+    }
+
+    input {
+      width: 180px;
+      height: 20px;
+      border: 2px solid black;
+      margin-bottom: 15px;
+      text-align: right;
+    }
+
+    .button {
+      display: inline-block;
+      width: 40px;
+      margin-bottom: 5px;
+      margin-right: : 5px;
+      border: 1px solid black;
+      text-align: center;
+      cursor: pointer;
+      transition: background .1s, color .1s
+    }
+
+    .button:not(.reset):hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .reset {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 15px;
+      height: 15px;
+      padding: 0;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="calc">
+    <input id="display" type="text">
+    <div class="reset button" data-type="C">C</div>
+    <div class="button" data-type="7">7</div>
+    <div class="button" data-type="8">8</div>
+    <div class="button" data-type="9">9</div>
+    <div class="button" data-type="/">÷</div>
+    <div class="button" data-type="4">4</div>
+    <div class="button" data-type="5">5</div>
+    <div class="button" data-type="6">6</div>
+    <div class="button" data-type="*">×</div>
+    <div class="button" data-type="1">1</div>
+    <div class="button" data-type="2">2</div>
+    <div class="button" data-type="3">3</div>
+    <div class="button" data-type="-">-</div>
+    <div class="button" data-type="0">0</div>
+    <div class="button" data-type=".">.</div>
+    <div class="button" data-type="=">=</div>
+    <div class="button" data-type="+">+</div>
+  </div>
+  <script>
+    var display = document.querySelector('#display');
+    var buttons = document.querySelectorAll('.button');
+    var reset = document.querySelector('.reset');
+    var str = '';
+
+    for (var i = 0; i < buttons.length; i++) {
+      addEvent(buttons[i]);
+    }
+
+    function addEvent(button) {
+      button.addEventListener('click', function () {
+        var type = button.getAttribute('data-type');
+        if (type === '=') {
+          str = eval(str);
+          display.value = str;
+          return;
+        } else if (type === 'C'){
+          str = '';
+          display.value = str;
+        } else {
+          str += type;
+        }
+        display.value = str;
+      })
+    }
+  </script>
+</body>
+</html>

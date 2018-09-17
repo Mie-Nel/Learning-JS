@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="slider1">
+    <div class="elem"></div>
+    <button class="prev">prev</button>
+    <button class="next">next</button>
+  </div>
+
+  <div id="slider2">
+    <div class="elem"></div>
+    <button class="prev">prev</button>
+    <button class="next">next</button>
+  </div>
+  <script>
+    initSlider(['text 1', 'text 2', 'text 3'], '#slider1');
+    initSlider(['text 4', 'text 5', 'text 6'], '#slider2');
+
+    function initSlider(texts, selector) {
+      var parent = document.querySelector(selector)
+      var slider = parent.querySelector('.elem');
+      var prevEl = parent.querySelector('.prev');
+      var nextEl = parent.querySelector('.next');
+
+      var i = 0;
+      slider.innerHTML = texts[0];
+
+      nextEl.addEventListener('click', function () {
+        i++;
+        if (i == texts.length) {
+          i = 0;
+        }
+        slider.innerHTML = texts[i];
+      })
+
+      prevEl.addEventListener('click', function () {
+        i--;
+        if (i == -1) {
+          i = texts.length - 1;
+        }
+        slider.innerHTML = texts[i];
+      })
+    }
+  </script>
+</body>
+</html>
